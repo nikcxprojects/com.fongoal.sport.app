@@ -46,9 +46,15 @@ public class UIManager : MonoBehaviour
         levelText.text = $"{GameManager.level}";
     }
 
+    public static void ShowPopup(string status)
+    {
+        Instantiate(Resources.Load<Popup>("popup"), GameObject.Find("main canvas").transform).Init(status);
+    }
+
     private void Awake()
     {
         scoreText.text = $"{GameManager.score}";
+        levelText.text = $"{GameManager.level + 1}";
 
         Loading.OnLoadingStarted += () =>
         {

@@ -36,17 +36,23 @@ public class GameManager : MonoBehaviour
     {
         if(!IsCaught)
         {
+            noCaughtCount++;
+            UIManager.ShowPopup("sucess");
+
+            if (noCaughtCount >= 3)
+            {
+                UIManager.ShowPopup("level up");
+
+                noCaughtCount = 0;
+                level++;
+            }
+
             SFXManager.PlayGoalReaction();
             score++;
         }
         else
         {
-            noCaughtCount++;
-            if(noCaughtCount >= 3)
-            {
-                noCaughtCount = 0;
-                level++;
-            }
+            UIManager.ShowPopup("lose");
         }
     }
 
