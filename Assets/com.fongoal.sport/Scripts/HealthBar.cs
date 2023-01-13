@@ -10,7 +10,7 @@ public class HealthBar : MonoBehaviour
 
     private void Awake()
     {
-        Enemy.OnBallÑaught += OnBallÑaughtEventHandler;
+        Enemy.OnBallGaught += OnBallÑaughtEventHandler;
     }
 
     private void OnBallÑaughtEventHandler(bool IsCaught)

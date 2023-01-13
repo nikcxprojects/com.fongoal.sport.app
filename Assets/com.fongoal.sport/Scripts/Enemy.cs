@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
 
     private GameObject[] Targets { get; set; }
 
-    public static Action<bool> OnBall—aught { get; set; }
+    public static Action<bool> OnBallGaught { get; set; }
 
     private void Awake()
     {
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
     private IEnumerator CheckResult(Transform rv, Transform target)
     {
         yield return new WaitForSeconds(0.35f);
-        OnBall—aught?.Invoke(rv == target);
+        OnBallGaught?.Invoke(rv == target);
     }
 
     private void ResetMe()

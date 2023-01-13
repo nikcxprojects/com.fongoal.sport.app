@@ -24,12 +24,12 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Enemy.OnBallÑaught += OnBallÑaughtEventHandler;
+        Enemy.OnBallGaught += OnBallÑaughtEventHandler;
     }
 
     private void OnDestroy()
     {
-        Enemy.OnBallÑaught -= OnBallÑaughtEventHandler;
+        Enemy.OnBallGaught -= OnBallÑaughtEventHandler;
     }
 
     private void OnBallÑaughtEventHandler(bool IsCaught)
