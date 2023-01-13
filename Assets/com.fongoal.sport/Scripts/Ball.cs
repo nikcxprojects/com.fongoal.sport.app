@@ -10,13 +10,14 @@ public class Ball : MonoBehaviour
     private Transform Center { get; set; }
 
     public float totalDistance = 4.0f;
-    private const float force = 60;
+    private const float force = 25;
 
     private static Rigidbody2D Rigidbody { get; set; }
     private static Vector2 Velocity { get; set; }
 
     private bool EndTravel { get; set; }
     public static Action OnTravelled { get; set; }
+    public static Action<Transform> OnPressed { get; set; }
 
     private void OnMouseDown()
     {
@@ -28,6 +29,8 @@ public class Ball : MonoBehaviour
 
         Rigidbody.AddForce(direction.normalized * force, ForceMode2D.Impulse);
         Invoke(nameof(ResetMe), 2.5f);
+
+        OnPressed?.Invoke(target);
     }
 
     private void Start()
