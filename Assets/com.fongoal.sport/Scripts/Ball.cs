@@ -4,8 +4,8 @@ using Random = UnityEngine.Random;
 
 public class Ball : MonoBehaviour
 {
-    private Vector2 InitScale { get; set; } = Vector3.one;
-    private Vector2 TargetScale { get; set; } = Vector3.one * 0.5f;
+    private Vector2 InitScale { get; set; } = Vector3.one * 0.08922569f;
+    private Vector2 TargetScale { get; set; } = Vector3.one * 0.05888896f;
 
     private Transform Center { get; set; }
 
@@ -28,8 +28,6 @@ public class Ball : MonoBehaviour
 
         Rigidbody.AddForce(direction.normalized * force, ForceMode2D.Impulse);
         Invoke(nameof(ResetMe), 2.5f);
-
-        FindObjectOfType<Mark>().GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void Start()
@@ -61,15 +59,5 @@ public class Ball : MonoBehaviour
 
         transform.position = new Vector2(-1.4f, -3.68f);
         Rigidbody.Sleep();
-
-        Target[] targets = FindObjectsOfType<Target>();
-        foreach (Target t in targets)
-        {
-            t.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            t.gameObject.GetComponent<CircleCollider2D>().enabled = true;
-        }
-
-        FindObjectOfType<Mark>().transform.position = new Vector2(0, 1000);
-        FindObjectOfType<Mark>().GetComponent<SpriteRenderer>().enabled = true;
     }
 }
