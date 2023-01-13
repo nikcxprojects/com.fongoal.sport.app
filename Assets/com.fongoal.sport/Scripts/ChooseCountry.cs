@@ -17,15 +17,7 @@ public class ChooseCountry : MonoBehaviour
     {
         confirm.interactable = false;
 
-        transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() =>
-        {
-            for (int i = 0; i < countries.Length; i++)
-            {
-                countries[i].interactable = true;
-            }
-
-            confirm.interactable = false;
-        });
+        transform.GetChild(0).GetComponent<Button>().onClick.AddListener(ResetClick);
 
         backBtn.onClick.AddListener(() =>
         {
@@ -36,14 +28,15 @@ public class ChooseCountry : MonoBehaviour
         {
             if (!set.Item1)
             {
+                ResetClick();
                 set.Item1 = spriteRef;
             }
-            else if(!set.Item2)
+            else if (!set.Item2)
             {
                 set.Item2 = spriteRef;
             }
 
-            if(set.Item1 && set.Item2)
+            if (set.Item1 && set.Item2)
             {
                 confirm.gameObject.SetActive(false);
                 playBtn.gameObject.SetActive(true);
@@ -64,6 +57,16 @@ public class ChooseCountry : MonoBehaviour
         }
     }
 
+    private void ResetClick()
+    {
+        for (int i = 0; i < countries.Length; i++)
+        {
+            countries[i].interactable = true;
+        }
+
+        confirm.interactable = false;
+    }
+
     private void SetCountry(int id)
     {
         spriteRef = countries[id].GetComponent<Image>().sprite;
@@ -76,19 +79,14 @@ public class ChooseCountry : MonoBehaviour
         confirm.interactable = true;
     }
 
-    private void OnDisable()
+    private void OnEnable()
     {
         spriteRef = null;
         set = (null, null);
 
-        transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() =>
-        {
-            for (int i = 0; i < countries.Length; i++)
-            {
-                countries[i].interactable = true;
-            }
+        confirm.gameObject.SetActive(true);
+        playBtn.gameObject.SetActive(false);
 
-            confirm.interactable = false;
-        });
+        ResetClick();
     }
 }
