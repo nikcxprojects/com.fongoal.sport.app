@@ -3,8 +3,12 @@ using UnityEngine;
 
 public class ChooseCountry : MonoBehaviour
 {
+    private Sprite spriteRef;
+    private (Sprite, Sprite) set;
+
     [SerializeField] Button backBtn;
     [SerializeField] Button confirm;
+    [SerializeField] Button playBtn;
 
     [Space(10)]
     [SerializeField] Button[] countries;
@@ -30,7 +34,25 @@ public class ChooseCountry : MonoBehaviour
 
         confirm.onClick.AddListener(() =>
         {
-            //UIManager.Instance.OpenMenu();
+            if (!set.Item1)
+            {
+                set.Item1 = spriteRef;
+            }
+            else if(!set.Item2)
+            {
+                set.Item2 = spriteRef;
+            }
+
+            if(set.Item1 && set.Item2)
+            {
+                confirm.gameObject.SetActive(false);
+                playBtn.gameObject.SetActive(true);
+            }
+        });
+
+        playBtn.onClick.AddListener(() =>
+        {
+            gameObject.SetActive(false);
         });
 
         foreach(Button b in countries)
@@ -44,11 +66,29 @@ public class ChooseCountry : MonoBehaviour
 
     private void SetCountry(int id)
     {
+        spriteRef = countries[id].GetComponent<Image>().sprite;
+
         for(int i = 0; i < countries.Length; i++)
         {
             countries[i].interactable = id == i;
         }
 
         confirm.interactable = true;
+    }
+
+    private void OnDisable()
+    {
+        spriteRef = null;
+        set = (null, null);
+
+        transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() =>
+        {
+            for (int i = 0; i < countries.Length; i++)
+            {
+                countries[i].interactable = true;
+            }
+
+            confirm.interactable = false;
+        });
     }
 }
