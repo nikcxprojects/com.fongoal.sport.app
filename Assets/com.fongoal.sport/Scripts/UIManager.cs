@@ -10,10 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject game;
     [SerializeField] GameObject rules;
     [SerializeField] GameObject rating;
-
-
-    [Space(10)]
-    [SerializeField] ChooseCountry chooseCountry;
+    [SerializeField] GameObject country;
 
     [Space(10)]
     [SerializeField] Button chooseCountryBtn;
@@ -26,8 +23,9 @@ public class UIManager : MonoBehaviour
         {
             menu.SetActive(false);
             game.SetActive(false);
-
-            chooseCountry.gameObject.SetActive(false);
+            rules.SetActive(false);
+            rating.SetActive(false);
+            country.SetActive(false);
         };
 
         Loading.OnLoadingFinished += () =>
@@ -37,8 +35,7 @@ public class UIManager : MonoBehaviour
 
         chooseCountryBtn.onClick.AddListener(() =>
         {
-            menu.SetActive(false);
-            chooseCountry.gameObject.SetActive(true);
+            country.SetActive(true);
         });
 
         rulesBtn.onClick.AddListener(() =>
@@ -59,8 +56,6 @@ public class UIManager : MonoBehaviour
 
     public void OpenMenu()
     {
-        chooseCountry.gameObject.SetActive(false);
-
         game.SetActive(false);
         menu.SetActive(true);
 
