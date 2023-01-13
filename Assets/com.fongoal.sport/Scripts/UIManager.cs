@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject rules;
     [SerializeField] GameObject rating;
     [SerializeField] GameObject country;
+    [SerializeField] GameObject pause;
 
     [Space(10)]
     [SerializeField] Button chooseCountryBtn;
@@ -58,6 +59,7 @@ public class UIManager : MonoBehaviour
     {
         game.SetActive(false);
         menu.SetActive(true);
+        pause.SetActive(false);
 
         GameManager.Instance.EndGame();
     }
@@ -66,7 +68,16 @@ public class UIManager : MonoBehaviour
     {
         menu.SetActive(false);
         game.SetActive(true);
+        pause.SetActive(false);
 
         GameManager.Instance.StartGame();
+    }
+
+    public void IsPauseGame(bool IsPause)
+    {
+        GameManager.IsPause = IsPause;
+
+        Time.timeScale = IsPause ? 0 : 1;
+        pause.SetActive(IsPause);
     }
 }

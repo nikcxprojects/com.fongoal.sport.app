@@ -23,6 +23,11 @@ public class Ball : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(GameManager.IsPause)
+        {
+            return;
+        }
+
         if(Source.isPlaying)
         {
             Source.Stop();

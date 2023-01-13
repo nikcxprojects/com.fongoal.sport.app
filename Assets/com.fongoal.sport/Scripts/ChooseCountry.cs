@@ -70,6 +70,7 @@ public class ChooseCountry : MonoBehaviour
 
     private void SetCountry(int id)
     {
+        SFXManager.PlayOnClick();
         spriteRef = countries[id].GetComponent<Image>().sprite;
 
         for(int i = 0; i < countries.Length; i++)

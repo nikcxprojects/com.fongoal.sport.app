@@ -4,6 +4,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get => FindObjectOfType<GameManager>(); }
 
+    public static bool IsPause { get; set; }
+
     private GameObject LevelPrefab { get; set; }
     private GameObject LevelRef { get; set; }
 
@@ -17,6 +19,11 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        if (LevelRef)
+        {
+            Destroy(LevelRef);
+        }
+
         LevelRef = Instantiate(LevelPrefab, Parent);
     }
 
