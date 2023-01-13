@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
 
     private void OnBallPressdEventHandler(Transform target)
     {
-        Transform rv = Random.Range(0, 100) > 99 ? target : Targets[Random.Range(0, Targets.Length)].transform;
+        Transform rv = Random.Range(0, 100) > 75 ? target : Targets[Random.Range(0, Targets.Length)].transform;
         Vector2 direction = rv.transform.position - transform.position;
 
         StartCoroutine(CheckResult(rv, target));

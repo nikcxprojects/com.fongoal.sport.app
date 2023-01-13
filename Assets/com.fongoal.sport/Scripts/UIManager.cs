@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
             scoreText.text = $"{GameManager.score}";
         }
 
-        levelText.text = $"{GameManager.level}";
+        levelText.text = $"{GameManager.level + 1}";
     }
 
     public static void ShowPopup(string status)
@@ -108,6 +108,9 @@ public class UIManager : MonoBehaviour
 
         GameManager.Instance.StartGame();
         healthBar.ResetMe();
+
+        scoreText.text = $"{GameManager.score}";
+        levelText.text = $"{GameManager.level + 1}";
     }
 
     public void IsPauseGame(bool IsPause)
