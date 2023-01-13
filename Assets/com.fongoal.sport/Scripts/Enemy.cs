@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
         Transform rv = Random.Range(0, 100) > 70 ? target : Targets[Random.Range(0, Targets.Length)].transform;
         Vector2 direction = rv.transform.position - transform.position;
 
-        OnBallÑaught?.Invoke(rv != target);
+        OnBallÑaught?.Invoke(rv == target);
         Renderer.sprite = target.position.x > transform.position.x ? right : left;
 
         Rigidbody.AddForce(direction.normalized * force, ForceMode2D.Impulse);

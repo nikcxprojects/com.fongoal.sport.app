@@ -32,8 +32,9 @@ public class GameManager : MonoBehaviour
 
     private void OnBall—aughtEventHandler(bool IsCaught)
     {
-        if(IsCaught)
+        if(!IsCaught)
         {
+            SFXManager.PlayGoalReaction();
             score++;
         }
     }

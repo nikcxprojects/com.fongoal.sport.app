@@ -22,6 +22,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] Button rulesBtn;
     [SerializeField] Button ratingBtn;
 
+    [Space(10)]
+    [SerializeField] HealthBar healthBar;
+
     private void OnEnable()
     {
         Enemy.OnBallÑaught += OnBallÑaughtEventHandler;
@@ -34,7 +37,7 @@ public class UIManager : MonoBehaviour
 
     private void OnBallÑaughtEventHandler(bool IsCaught)
     {
-        if (IsCaught)
+        if (!IsCaught)
         {
             scoreText.text = $"{GameManager.score}";
         }
@@ -42,6 +45,8 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        scoreText.text = $"{GameManager.score}";
+
         Loading.OnLoadingStarted += () =>
         {
             menu.SetActive(false);
@@ -93,6 +98,7 @@ public class UIManager : MonoBehaviour
         pause.SetActive(false);
 
         GameManager.Instance.StartGame();
+        healthBar.ResetMe();
     }
 
     public void IsPauseGame(bool IsPause)

@@ -18,4 +18,14 @@ public class SFXManager : MonoBehaviour
 
         SFXSource.Play();
     }
+
+    public static void PlayGoalReaction()
+    {
+        if (SFXSource.isPlaying)
+        {
+            SFXSource.Stop();
+        }
+
+        SFXSource.PlayOneShot(Resources.Load<AudioClip>("goal sfx"));
+    }
 }
