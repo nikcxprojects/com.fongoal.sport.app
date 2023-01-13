@@ -12,6 +12,8 @@ public class Ball : MonoBehaviour
     public float totalDistance = 4.0f;
     private const float force = 25;
 
+    private AudioSource Source { get; set; }
+
     private static Rigidbody2D Rigidbody { get; set; }
     private static Vector2 Velocity { get; set; }
 
@@ -21,6 +23,13 @@ public class Ball : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(Source.isPlaying)
+        {
+            Source.Stop();
+        }
+
+        Source.Play();
+
         GameObject[] targets = GameObject.FindGameObjectsWithTag("target");
         Rigidbody.WakeUp();
 
@@ -37,6 +46,8 @@ public class Ball : MonoBehaviour
     {
         Center = GameObject.Find("center").transform;
         Rigidbody = GetComponent<Rigidbody2D>();
+
+        Source = GetComponent<AudioSource>();
 
         ResetMe();
     }

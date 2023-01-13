@@ -24,7 +24,7 @@ public class Loading : MonoBehaviour
         OnLoadingStarted?.Invoke();
         getStarted.gameObject.SetActive(false);
 
-        float loadingTime = 4.0f;
+        float loadingTime = 2.5f;
         yield return new WaitForSeconds(loadingTime);
 
         getStarted.gameObject.SetActive(true);
