@@ -10,6 +10,8 @@ public class SoundOption : MonoBehaviour
 
     private void Start()
     {
+        Image = GetComponent<Image>();
+
         GetComponent<Button>().onClick.AddListener(() =>
         {
             AudioListener.pause = !AudioListener.pause;
