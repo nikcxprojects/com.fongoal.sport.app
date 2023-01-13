@@ -8,6 +8,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject loading;
     [SerializeField] GameObject menu;
     [SerializeField] GameObject game;
+    [SerializeField] GameObject rules;
+    [SerializeField] GameObject rating;
+
+
+    [Space(10)]
     [SerializeField] ChooseCountry chooseCountry;
 
     [Space(10)]
@@ -38,12 +43,12 @@ public class UIManager : MonoBehaviour
 
         rulesBtn.onClick.AddListener(() =>
         {
-            
+            rules.SetActive(true);
         });
 
         ratingBtn.onClick.AddListener(() =>
         {
-
+            rating.SetActive(true);
         });
     }
 
