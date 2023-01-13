@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -14,9 +15,30 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject pause;
 
     [Space(10)]
+    [SerializeField] Text scoreText;
+
+    [Space(10)]
     [SerializeField] Button chooseCountryBtn;
     [SerializeField] Button rulesBtn;
     [SerializeField] Button ratingBtn;
+
+    private void OnEnable()
+    {
+        Enemy.OnBallÑaught += OnBallÑaughtEventHandler;
+    }
+
+    private void OnDestroy()
+    {
+        Enemy.OnBallÑaught -= OnBallÑaughtEventHandler;
+    }
+
+    private void OnBallÑaughtEventHandler(bool IsCaught)
+    {
+        if (IsCaught)
+        {
+            scoreText.text = $"{GameManager.score}";
+        }
+    }
 
     private void Awake()
     {

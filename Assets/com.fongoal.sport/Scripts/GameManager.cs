@@ -1,8 +1,11 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get => FindObjectOfType<GameManager>(); }
+
+    public static int score = 0;
 
     public static bool IsPause { get; set; }
 
@@ -17,8 +20,28 @@ public class GameManager : MonoBehaviour
         Parent = GameObject.Find("Environment").transform;
     }
 
+    private void OnEnable()
+    {
+        Enemy.OnBallÑaught += OnBallÑaughtEventHandler;
+    }
+
+    private void OnDestroy()
+    {
+        Enemy.OnBallÑaught -= OnBallÑaughtEventHandler;
+    }
+
+    private void OnBallÑaughtEventHandler(bool IsCaught)
+    {
+        if(IsCaught)
+        {
+            score++;
+        }
+    }
+
     public void StartGame()
     {
+        score = 0;
+
         Time.timeScale = 1;
         IsPause = false;
 

@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -15,6 +18,8 @@ public class Enemy : MonoBehaviour
 
 
     private GameObject[] Targets { get; set; }
+
+    public static Action<bool> OnBallÑaught { get; set; }
 
     private void Awake()
     {
@@ -37,11 +42,7 @@ public class Enemy : MonoBehaviour
         Transform rv = Random.Range(0, 100) > 70 ? target : Targets[Random.Range(0, Targets.Length)].transform;
         Vector2 direction = rv.transform.position - transform.position;
 
-        if (rv != target)
-        {
-            //Instantiate(Resources.Load<Popup>("popup"), GameObject.Find("main canvas").transform);
-        }
-
+        OnBallÑaught?.Invoke(rv != target);
         Renderer.sprite = target.position.x > transform.position.x ? right : left;
 
         Rigidbody.AddForce(direction.normalized * force, ForceMode2D.Impulse);
