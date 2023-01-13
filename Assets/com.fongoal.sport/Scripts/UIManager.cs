@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
 
     [Space(10)]
     [SerializeField] Text scoreText;
+    [SerializeField] Text levelText;
 
     [Space(10)]
     [SerializeField] Button chooseCountryBtn;
@@ -41,6 +42,8 @@ public class UIManager : MonoBehaviour
         {
             scoreText.text = $"{GameManager.score}";
         }
+
+        levelText.text = $"{GameManager.level}";
     }
 
     private void Awake()

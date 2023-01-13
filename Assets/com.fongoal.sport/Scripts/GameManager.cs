@@ -5,7 +5,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get => FindObjectOfType<GameManager>(); }
 
+    private int noCaughtCount = 0;
     public static int score = 0;
+    public static int level = 0;
 
     public static bool IsPause { get; set; }
 
@@ -37,11 +39,21 @@ public class GameManager : MonoBehaviour
             SFXManager.PlayGoalReaction();
             score++;
         }
+        else
+        {
+            noCaughtCount++;
+            if(noCaughtCount >= 3)
+            {
+                noCaughtCount = 0;
+                level++;
+            }
+        }
     }
 
     public void StartGame()
     {
         score = 0;
+        level = 0;
 
         Time.timeScale = 1;
         IsPause = false;

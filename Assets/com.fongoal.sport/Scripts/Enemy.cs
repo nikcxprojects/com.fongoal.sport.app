@@ -1,6 +1,6 @@
 using System;
+using System.Collections;
 using UnityEngine;
-
 using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
@@ -39,14 +39,20 @@ public class Enemy : MonoBehaviour
 
     private void OnBallPressdEventHandler(Transform target)
     {
-        Transform rv = Random.Range(0, 100) > 70 ? target : Targets[Random.Range(0, Targets.Length)].transform;
+        Transform rv = Random.Range(0, 100) > 1 ? target : Targets[Random.Range(0, Targets.Length)].transform;
         Vector2 direction = rv.transform.position - transform.position;
 
-        OnBall—aught?.Invoke(rv == target);
+        StartCoroutine(CheckResult(rv, target));
         Renderer.sprite = target.position.x > transform.position.x ? right : left;
 
         Rigidbody.AddForce(direction.normalized * force, ForceMode2D.Impulse);
         Invoke(nameof(ResetMe), 0.5f);
+    }
+
+    private IEnumerator CheckResult(Transform rv, Transform target)
+    {
+        yield return new WaitForSeconds(0.35f);
+        OnBall—aught?.Invoke(rv == target);
     }
 
     private void ResetMe()
