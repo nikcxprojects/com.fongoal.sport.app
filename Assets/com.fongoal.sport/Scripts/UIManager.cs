@@ -61,4 +61,12 @@ public class UIManager : MonoBehaviour
 
         GameManager.Instance.EndGame();
     }
+
+    public void StartGameOnClick()
+    {
+        menu.SetActive(false);
+        game.SetActive(true);
+
+        GameManager.Instance.StartGame();
+    }
 }

@@ -46,7 +46,7 @@ public class ChooseCountry : MonoBehaviour
         playBtn.onClick.AddListener(() =>
         {
             gameObject.SetActive(false);
-            Instantiate(Resources.Load<Versus>("versus")).Init(set);
+            Instantiate(Resources.Load<Versus>("versus"), GameObject.Find("main canvas").transform).Init(set);
         });
 
         foreach(Button b in countries)

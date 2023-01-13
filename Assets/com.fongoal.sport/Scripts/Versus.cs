@@ -9,7 +9,7 @@ public class Versus : MonoBehaviour
     private void OnEnable()
     {
         Destroy(gameObject, 1.5f);
-        GameManager.Instance.StartGame();
+        UIManager.Instance.StartGameOnClick();
     }
 
     public void Init((Sprite, Sprite) set)
