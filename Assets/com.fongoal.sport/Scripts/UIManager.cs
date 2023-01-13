@@ -28,15 +28,15 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Enemy.OnBallGaught += OnBall—aughtEventHandler;
+        Enemy.OnBallGaught += OnBallGaughtEventHandler;
     }
 
     private void OnDestroy()
     {
-        Enemy.OnBallGaught -= OnBall—aughtEventHandler;
+        Enemy.OnBallGaught -= OnBallGaughtEventHandler;
     }
 
-    private void OnBall—aughtEventHandler(bool IsCaught)
+    private void OnBallGaughtEventHandler(bool IsCaught)
     {
         if (!IsCaught)
         {
