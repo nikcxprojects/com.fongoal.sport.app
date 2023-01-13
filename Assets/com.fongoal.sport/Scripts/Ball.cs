@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-
 using Random = UnityEngine.Random;
 
 public class Ball : MonoBehaviour
@@ -18,34 +17,19 @@ public class Ball : MonoBehaviour
 
     private bool EndTravel { get; set; }
     public static Action OnTravelled { get; set; }
-    public static Action OnPressed { get; set; }
 
-    private void Awake()
+    private void OnMouseDown()
     {
-        Target.OnPressed += (target) =>
-        {
-            Rigidbody.WakeUp();
-            OnPressed?.Invoke();
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("target");
+        Rigidbody.WakeUp();
 
-            Vector2 direction = target.transform.position - transform.position;
+        Transform target = targets[Random.Range(0, targets.Length)].transform;
+        Vector2 direction = target.transform.position - transform.position;
 
-            Rigidbody.AddForce(direction.normalized * force, ForceMode2D.Impulse);
-            Invoke(nameof(ResetMe), 2.5f);
+        Rigidbody.AddForce(direction.normalized * force, ForceMode2D.Impulse);
+        Invoke(nameof(ResetMe), 2.5f);
 
-            Target[] targets = FindObjectsOfType<Target>();
-            foreach (Target t in targets)
-            {
-                t.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-                t.gameObject.GetComponent<CircleCollider2D>().enabled = false;
-            }
-
-            FindObjectOfType<Mark>().GetComponent<SpriteRenderer>().enabled = false;
-        };
-    }
-
-    private void OnDestroy()
-    {
-        Target.OnPressed = null;
+        FindObjectOfType<Mark>().GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void Start()
@@ -75,7 +59,7 @@ public class Ball : MonoBehaviour
         Rigidbody.velocity = Vector2.zero;
         Rigidbody.angularVelocity = 0;
 
-        transform.position = new Vector2(-4.81f, -2.79f);
+        transform.position = new Vector2(-1.4f, -3.68f);
         Rigidbody.Sleep();
 
         Target[] targets = FindObjectsOfType<Target>();
