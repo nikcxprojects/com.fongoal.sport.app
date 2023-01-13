@@ -13,6 +13,16 @@ public class ChooseCountry : MonoBehaviour
     {
         confirm.interactable = false;
 
+        transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() =>
+        {
+            for (int i = 0; i < countries.Length; i++)
+            {
+                countries[i].interactable = true;
+            }
+
+            confirm.interactable = false;
+        });
+
         backBtn.onClick.AddListener(() =>
         {
             gameObject.SetActive(false);
