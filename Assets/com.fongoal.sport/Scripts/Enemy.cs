@@ -20,27 +20,32 @@ public class Enemy : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         Renderer = GetComponent<SpriteRenderer>();
+    }
 
-        Ball.OnPressed += (target) =>
-        {
-            Transform rv = Random.Range(0,100) > 70 ? target : Targets[Random.Range(0, Targets.Length)].transform;
-            Vector2 direction = rv.transform.position - transform.position;
-
-            if(rv != target)
-            {
-                //Instantiate(Resources.Load<Popup>("popup"), GameObject.Find("main canvas").transform);
-            }
-
-            Renderer.sprite = target.position.x > transform.position.x ? right : left;
-
-            Rigidbody.AddForce(direction.normalized * force, ForceMode2D.Impulse);
-            Invoke(nameof(ResetMe), 0.5f);
-        };
+    private void OnEnable()
+    {
+        Ball.OnPressed += OnBallPressdEventHandler;
     }
 
     private void OnDestroy()
     {
-        Ball.OnPressed = null;
+        Ball.OnPressed -= OnBallPressdEventHandler;
+    }
+
+    private void OnBallPressdEventHandler(Transform target)
+    {
+        Transform rv = Random.Range(0, 100) > 70 ? target : Targets[Random.Range(0, Targets.Length)].transform;
+        Vector2 direction = rv.transform.position - transform.position;
+
+        if (rv != target)
+        {
+            //Instantiate(Resources.Load<Popup>("popup"), GameObject.Find("main canvas").transform);
+        }
+
+        Renderer.sprite = target.position.x > transform.position.x ? right : left;
+
+        Rigidbody.AddForce(direction.normalized * force, ForceMode2D.Impulse);
+        Invoke(nameof(ResetMe), 0.5f);
     }
 
     private void ResetMe()

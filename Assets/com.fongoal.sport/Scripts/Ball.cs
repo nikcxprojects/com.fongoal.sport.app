@@ -47,18 +47,25 @@ public class Ball : MonoBehaviour
         OnPressed?.Invoke(target);
     }
 
-    private void Start()
+    private void Awake()
     {
-        Center = GameObject.Find("center").transform;
         Rigidbody = GetComponent<Rigidbody2D>();
 
         Source = GetComponent<AudioSource>();
+    }
 
+    private void Start()
+    {
         ResetMe();
     }
 
     private void Update()
     {
+        if(!Center)
+        {
+            Center = GameObject.Find("center").transform;
+        }
+
         float distanceToGoal = Mathf.Abs(Center.position.y - transform.position.y);
         if(distanceToGoal <= 1 && !EndTravel)
         {
