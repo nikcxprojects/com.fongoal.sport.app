@@ -11,25 +11,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] ChooseCountry chooseCountry;
 
     [Space(10)]
-    [SerializeField] GameObject progress;
-
-    [Space(10)]
-    [SerializeField] Button startBtn;
     [SerializeField] Button chooseCountryBtn;
-
-    [Space(10)]
-    [SerializeField] Image countryIcon;
-    [SerializeField] Text countryName;
-
-    [Space(10)]
-    [SerializeField] GameObject canvasLandscape;
+    [SerializeField] Button rulesBtn;
+    [SerializeField] Button ratingBtn;
 
     private void Awake()
     {
         Loading.OnLoadingStarted += () =>
         {
             menu.SetActive(false);
-            progress.SetActive(false);
             game.SetActive(false);
 
             chooseCountry.gameObject.SetActive(false);
@@ -38,23 +28,22 @@ public class UIManager : MonoBehaviour
         Loading.OnLoadingFinished += () =>
         {
             menu.SetActive(true);
-            progress.SetActive(true);
         };
-
-        startBtn.onClick.AddListener(() =>
-        {
-            canvasLandscape.SetActive(false);
-
-            menu.SetActive(false);
-            game.SetActive(true);
-
-            GameManager.Instance.StartGame();
-        });
 
         chooseCountryBtn.onClick.AddListener(() =>
         {
             menu.SetActive(false);
             chooseCountry.gameObject.SetActive(true);
+        });
+
+        rulesBtn.onClick.AddListener(() =>
+        {
+            
+        });
+
+        ratingBtn.onClick.AddListener(() =>
+        {
+
         });
     }
 
@@ -63,17 +52,8 @@ public class UIManager : MonoBehaviour
         loading.SetActive(true);
     }
 
-    public void SetCountry(Sprite icon, string name, int id)
-    {
-        countryIcon.sprite = icon;
-        countryName.text = name;
-
-        chooseCountry.SetCountry(id);
-    }
-
     public void OpenMenu()
     {
-        canvasLandscape.SetActive(true);
         chooseCountry.gameObject.SetActive(false);
 
         game.SetActive(false);
